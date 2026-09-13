@@ -1,0 +1,13 @@
+{
+  "name": "pennywise",
+  "version": "1.0.0",
+  "description": "PennyWise - Intelligent Financial Tracking & Roast Engine",
+  "scripts": {
+    "install:all": "cd backend && npm install && cd ../frontend && npm install",
+    "server": "cd backend && npm start",
+    "client": "cd frontend && npm run dev",
+    "build:client": "cd frontend && npm run build"
+  },
+  "author": "PennyWise Team",
+  "license": "MIT"
+}
