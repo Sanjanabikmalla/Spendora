@@ -1,6 +1,44 @@
 {
   "transactions": [
     {
+      "id": "tx_1789323121883_l6fna8",
+      "user_id": "user_pennywise_01",
+      "merchant": "Bikmalla Sanjana",
+      "amount": 1,
+      "currency": "INR",
+      "category": "Others",
+      "transaction_type": "debit",
+      "date": "2026-09-13",
+      "timestamp": "2026-09-13T23:41:53",
+      "source": "BANK_SMS",
+      "note": "A solid ₹1 spent at Bikmalla Sanjana. PennyWise is keeping score!",
+      "transaction_hash": "0f8934249f7fc12ef686c543ec45c426",
+      "bank_name": "HDFC Bank",
+      "account_number": "5991",
+      "sync_status": "SYNCED",
+      "created_at": "2026-09-13T18:12:01.883Z",
+      "updated_at": "2026-09-13T18:12:01.883Z"
+    },
+    {
+      "id": "tx_1789322811785_k6qw69",
+      "user_id": "user_pennywise_01",
+      "merchant": "Bikmalla Sanjana",
+      "amount": 1,
+      "currency": "INR",
+      "category": "Others",
+      "transaction_type": "debit",
+      "date": "2026-09-13",
+      "timestamp": "2026-09-13T23:36:39",
+      "source": "BANK_SMS",
+      "note": "A solid ₹1 spent at Bikmalla Sanjana. PennyWise is keeping score!",
+      "transaction_hash": "6684b30ca3ea47db260f054acf773f50",
+      "bank_name": "HDFC Bank",
+      "account_number": "5991",
+      "sync_status": "SYNCED",
+      "created_at": "2026-09-13T18:06:51.785Z",
+      "updated_at": "2026-09-13T18:06:51.785Z"
+    },
+    {
       "id": "tx_1789322536413_369sao",
       "user_id": "user_pennywise_01",
       "merchant": "Swiggy",
@@ -238,8 +276,8 @@
   ],
   "deviceSync": {
     "user_pennywise_01": {
-      "lastSyncedAt": "2026-09-13T18:02:09.235Z",
-      "device": "PennyWise Android Demo",
+      "lastSyncedAt": "2026-09-13T18:12:01.880Z",
+      "device": "PennyWise Android",
       "appVersion": "2.19.0",
       "status": "CONNECTED"
     }
