@@ -2,17 +2,30 @@
 
 const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000/api';
 
+function getAuthHeaders() {
+  const token = localStorage.getItem('pennywise_token') || localStorage.getItem('supabase_token') || localStorage.getItem('sb-access-token');
+  const headers = { 'Content-Type': 'application/json' };
+  if (token) {
+    headers['Authorization'] = `Bearer ${token}`;
+  }
+  return headers;
+}
+
 export const api = {
   // Check backend sync and health status
   async checkHealth() {
-    const res = await fetch(`${API_BASE_URL}/health`);
+    const res = await fetch(`${API_BASE_URL}/health`, {
+      headers: getAuthHeaders()
+    });
     if (!res.ok) throw new Error('Backend health check failed');
     return res.json();
   },
 
   // Get Android device synchronization status (GET /api/sync/status)
   async getSyncStatus() {
-    const res = await fetch(`${API_BASE_URL}/sync/status`);
+    const res = await fetch(`${API_BASE_URL}/sync/status`, {
+      headers: getAuthHeaders()
+    });
     if (!res.ok) throw new Error('Failed to fetch sync status');
     return res.json();
   },
@@ -20,7 +33,12 @@ export const api = {
   // Subscribe to Realtime Server-Sent Events (GET /api/realtime)
   subscribeToRealtimeEvents(onEvent, onError) {
     try {
-      const eventSource = new EventSource(`${API_BASE_URL}/realtime`);
+      const token = localStorage.getItem('pennywise_token') || localStorage.getItem('supabase_token') || localStorage.getItem('sb-access-token');
+      const sseUrl = token 
+        ? `${API_BASE_URL}/realtime?token=${encodeURIComponent(token)}` 
+        : `${API_BASE_URL}/realtime`;
+
+      const eventSource = new EventSource(sseUrl);
 
       eventSource.addEventListener('connected', (e) => {
         try {
@@ -77,7 +95,9 @@ export const api = {
     if (limit) params.append('limit', limit);
     
     const url = `${API_BASE_URL}/transactions${params.toString() ? '?' + params.toString() : ''}`;
-    const res = await fetch(url);
+    const res = await fetch(url, {
+      headers: getAuthHeaders()
+    });
     if (!res.ok) throw new Error('Failed to fetch transactions');
     const data = await res.json();
     return {
@@ -90,7 +110,7 @@ export const api = {
   async createTransaction({ merchant, amount, category, note, date, timestamp, transactionType, source }) {
     const res = await fetch(`${API_BASE_URL}/transactions`, {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
+      headers: getAuthHeaders(),
       body: JSON.stringify({ 
         merchant, 
         amount: Number(amount), 
@@ -113,7 +133,7 @@ export const api = {
   async simulateSMS(smsText) {
     const res = await fetch(`${API_BASE_URL}/simulate-sms`, {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
+      headers: getAuthHeaders(),
       body: JSON.stringify({ sms: smsText })
     });
     if (!res.ok) {
@@ -125,7 +145,9 @@ export const api = {
 
   // Fetch complete analytics overview (GET /api/analytics)
   async getAnalytics() {
-    const res = await fetch(`${API_BASE_URL}/analytics`);
+    const res = await fetch(`${API_BASE_URL}/analytics`, {
+      headers: getAuthHeaders()
+    });
     if (!res.ok) throw new Error('Failed to fetch analytics');
     const data = await res.json();
     return {
@@ -136,7 +158,9 @@ export const api = {
 
   // Fetch smart insights directly (GET /api/insights)
   async getInsights() {
-    const res = await fetch(`${API_BASE_URL}/insights`);
+    const res = await fetch(`${API_BASE_URL}/insights`, {
+      headers: getAuthHeaders()
+    });
     if (!res.ok) throw new Error('Failed to fetch insights');
     const data = await res.json();
     return {
@@ -148,7 +172,8 @@ export const api = {
   // Delete transaction (DELETE /api/transactions/:id)
   async deleteTransaction(id) {
     const res = await fetch(`${API_BASE_URL}/transactions/${id}`, {
-      method: 'DELETE'
+      method: 'DELETE',
+      headers: getAuthHeaders()
     });
     if (!res.ok) throw new Error('Failed to delete transaction');
     return res.json();
@@ -157,9 +182,11 @@ export const api = {
   // Reset database to initial state (POST /api/reset)
   async resetDemo() {
     const res = await fetch(`${API_BASE_URL}/reset`, {
-      method: 'POST'
+      method: 'POST',
+      headers: getAuthHeaders()
     });
     if (!res.ok) throw new Error('Failed to reset demo data');
     return res.json();
   }
 };
+

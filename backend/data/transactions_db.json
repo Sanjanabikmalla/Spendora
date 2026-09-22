@@ -1,6 +1,25 @@
 {
   "transactions": [
     {
+      "id": "tx_1790080516558_1j3a2t",
+      "user_id": "user_pennywise_01",
+      "merchant": "Swiggy",
+      "amount": 680,
+      "currency": "INR",
+      "category": "Food",
+      "transaction_type": "debit",
+      "date": "2026-09-22",
+      "timestamp": "2026-09-22T12:35:16.553Z",
+      "source": "DEMO_SIMULATOR",
+      "note": "Ordered from Swiggy? Your kitchen misses you, but your stomach clearly voted against cooking.",
+      "transaction_hash": "f759b2f88c476a224fa2bca3065dadf5c24e7836c0be908748ceac36e00f6a80",
+      "bank_name": "Bank",
+      "account_number": null,
+      "sync_status": "SYNCED",
+      "created_at": "2026-09-22T12:35:16.558Z",
+      "updated_at": "2026-09-22T12:35:16.558Z"
+    },
+    {
       "id": "tx_1789323121883_l6fna8",
       "user_id": "user_pennywise_01",
       "merchant": "Bikmalla Sanjana",
@@ -41,8 +60,8 @@
   ],
   "deviceSync": {
     "user_pennywise_01": {
-      "lastSyncedAt": "2026-09-13T18:12:01.880Z",
-      "device": "PennyWise Android",
+      "lastSyncedAt": "2026-09-22T12:35:13.798Z",
+      "device": "PennyWise Android Demo",
       "appVersion": "2.19.0",
       "status": "CONNECTED"
     }
